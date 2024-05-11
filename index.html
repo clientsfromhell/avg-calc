@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上架包裹處理時間計算機</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input,
+        p {
+            margin-top: 5px;
+        }
+
+        .highlight {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>上架包裹處理時間計算機</h1>
+        <label for="startTime">開始時間:</label>
+        <input type="time" id="startTime" placeholder="HH:MM:ss" step="1">
+
+        <label for="endTime">結束時間:</label>
+        <input type="time" id="endTime" placeholder="HH:MM:ss" step="1">
+
+        <p>總秒數: <span id="totalSeconds">-</span></p>
+        <p id="minimumEventsText">達標至少需上架包裹數量: <span id="minimumEvents">-</span></p>
+        <p id="differenceText" style="display: none;">還差 <span id="difference">-</span> 個包裹才達標</p>
+
+        <label for="eventCount">上架包裹數量:</label>
+        <input type="number" id="eventCount" placeholder="輸入包裹數量">
+
+        <p id="averageTimeText">單一包裹上架平均處理秒數: <span id="averageTime">-</span></p>
+
+    </div>
+
+    <script>
+        const startTimeEl = document.getElementById('startTime');
+        const endTimeEl = document.getElementById('endTime');
+        const eventCountEl = document.getElementById('eventCount');
+        const totalSecondsEl = document.getElementById('totalSeconds');
+        const averageTimeEl = document.getElementById('averageTime');
+        const averageTimeTextEl = document.getElementById('averageTimeText');
+        const minimumEventsEl = document.getElementById('minimumEvents');
+        
+        let calculateTime = function () {
+            const startTime = startTimeEl.value;
+            const endTime = endTimeEl.value;
+            const eventCountValue = eventCountEl.value;
+            const eventCount = parseInt(eventCountValue, 10);
+            const differenceTextEl = document.getElementById('differenceText');
+            const differenceEl = document.getElementById('difference');
+
+            if (!startTime || !endTime) {
+                totalSecondsEl.textContent = '-';
+                averageTimeEl.textContent = '-';
+                minimumEventsEl.textContent = '-';
+                differenceTextEl.style.display = 'none';
+                return;
+            }
+
+            // const start = new Date(`1970-01-01T${startTime}:00`);
+            // const end = new Date(`1970-01-01T${endTime}:00`);
+            const start = new Date(`1970-01-01T${startTime}`);
+            const end = new Date(`1970-01-01T${endTime}`);
+            let seconds = (end - start) / 1000;
+            if (seconds < 0) {
+                seconds += 86400; // 處理跨午夜的情況
+            }
+
+            totalSecondsEl.textContent = seconds.toFixed(0);
+            const targetTime = 15;
+            const minimumEvents = Math.ceil(seconds / targetTime);
+            minimumEventsEl.textContent = minimumEvents;
+
+            if (eventCountValue && !isNaN(eventCount) && eventCount > 0) {
+                const averageTime = seconds / eventCount;
+                averageTimeEl.textContent = averageTime.toFixed(3);
+                averageTimeEl.className = averageTime > 15 ? 'highlight' : '';
+                if (averageTime > 15) {
+                    const difference = minimumEvents - eventCount;
+                    differenceEl.textContent = difference;
+                    differenceTextEl.style.display = 'block';
+                } else {
+                    differenceTextEl.style.display = 'none';
+                }
+            } else {
+                averageTimeEl.textContent = '-';
+                averageTimeEl.className = '';
+                differenceTextEl.style.display = 'none';
+            }
+        }
+
+        startTimeEl.addEventListener('input', calculateTime);
+        endTimeEl.addEventListener('input', calculateTime);
+        eventCountEl.addEventListener('input', calculateTime);
+        window.onload = function () {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('startTime').value = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('endTime').value = hours + ':' + minutes + ':' + seconds;
+            calculateTime();
+        };
+    </script>
+</body>
+
+</html>
