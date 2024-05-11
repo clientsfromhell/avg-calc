@@ -32,6 +32,10 @@
         .highlight {
             color: red;
         }
+
+        .slider-width {
+            width: 300px;
+        }
     </style>
 </head>
 
@@ -49,7 +53,9 @@
         <p id="differenceText" style="display: none;">還差 <span id="difference">-</span> 個包裹才達標</p>
 
         <label for="eventCount">上架包裹數量:</label>
-        <input type="number" id="eventCount" placeholder="輸入包裹數量">
+        <input class="slider-width" id="eventCount" type="range" value="170" min="1" max="350" oninput="this.nextElementSibling.value = this.value">
+        <output>170</output>
+        <!-- <input type="number" id="eventCount" placeholder="輸入包裹數量"> -->
 
         <p id="averageTimeText">單一包裹上架平均處理秒數: <span id="averageTime">-</span></p>
 
