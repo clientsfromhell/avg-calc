@@ -13,6 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: dimgray;
         }
 
         .container {
@@ -47,6 +48,7 @@
 <body>
     <div class="container">
         <h1>上架包裹處理時間計算機</h1>
+        
         <label for="startTime">開始時間:</label>
         <input type="time" id="startTime" placeholder="HH:MM:ss" step="1">
 
@@ -55,7 +57,7 @@
 
         <p>總秒數: <span id="totalSeconds">-</span></p>
         <p id="minimumEventsText">達標至少需上架包裹數量: <span id="minimumEvents">-</span></p>
-        <p id="differenceText" style="display: none;">還差 <span id="difference">-</span> 個包裹才達標</p>
+        <p id="differenceText" style="display: none;" class="highlight">還差 <span id="difference">-</span> 個包裹才達標</p>
 
         <p>
             <span  style="white-space:nowrap">
