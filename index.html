@@ -36,6 +36,11 @@
         .slider-width {
             width: 300px;
         }
+
+        input[type='number'] {
+            /* width: 80px; */
+            width: 8em;
+        }
     </style>
 </head>
 
@@ -52,11 +57,14 @@
         <p id="minimumEventsText">達標至少需上架包裹數量: <span id="minimumEvents">-</span></p>
         <p id="differenceText" style="display: none;">還差 <span id="difference">-</span> 個包裹才達標</p>
 
-        <label for="eventCount">上架包裹數量:</label>
-        <input class="slider-width" id="eventCount" type="range" value="170" min="1" max="350" oninput="this.nextElementSibling.value = this.value">
-        <output>170</output>
-        <!-- <input type="number" id="eventCount" placeholder="輸入包裹數量"> -->
-
+        <p>
+            <span  style="white-space:nowrap">
+            <label for="eventCount">實際上架包裹數量:</label>
+            <input type="number" id="eventCount" inputmode="numeric" min="1" max="500" placeholder="輸入上架數量">
+        </span>
+        </p>
+        <!-- <input class="slider-width" id="eventCount" type="range" value="170" min="1" max="350" oninput="this.nextElementSibling.value = this.value"> -->
+        <!-- <output>170</output> -->
         <p id="averageTimeText">單一包裹上架平均處理秒數: <span id="averageTime">-</span></p>
 
     </div>
@@ -69,8 +77,27 @@
         const averageTimeEl = document.getElementById('averageTime');
         const averageTimeTextEl = document.getElementById('averageTimeText');
         const minimumEventsEl = document.getElementById('minimumEvents');
+
+        let setCurrentTime = function() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('startTime').value = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('endTime').value = hours + ':' + minutes + ':' + seconds;
+        }
+
+        let validateTimes = function() {
+            const start = startTimeEl.value;
+            const end = endTimeEl.value;
+            
+            if (start && end && start >= end) {
+                alert('開始時間必須小於或等於結束時間。');
+                setCurrentTime(); // 設定當前時間
+            }
+        }
         
-        let calculateTime = function () {
+        let calculateTime = function() {
             const startTime = startTimeEl.value;
             const endTime = endTimeEl.value;
             const eventCountValue = eventCountEl.value;
@@ -121,13 +148,11 @@
         startTimeEl.addEventListener('input', calculateTime);
         endTimeEl.addEventListener('input', calculateTime);
         eventCountEl.addEventListener('input', calculateTime);
+        startTimeEl.addEventListener('change', validateTimes);
+        endTimeEl.addEventListener('change', validateTimes);
+
         window.onload = function () {
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('startTime').value = hours + ':' + minutes + ':' + seconds;
-            document.getElementById('endTime').value = hours + ':' + minutes + ':' + seconds;
+            setCurrentTime(); // 設定當前時間
             calculateTime();
         };
     </script>
