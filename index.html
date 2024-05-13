@@ -87,15 +87,15 @@
             document.getElementById('endTime').value = hours + ':' + minutes + ':' + seconds;
         }
 
-        let validateTimes = function() {
-            const start = startTimeEl.value;
-            const end = endTimeEl.value;
+        // let validateTimes = function() {
+        //     const start = startTimeEl.value;
+        //     const end = endTimeEl.value;
             
-            if (start && end && start >= end) {
-                alert('開始時間必須小於或等於結束時間。');
-                setCurrentTime(); // 設定當前時間
-            }
-        }
+        //     if (start && end && start >= end) {
+        //         alert('開始時間必須小於或等於結束時間。');
+        //         setCurrentTime(); // 設定當前時間
+        //     }
+        // }
         
         let calculateTime = function() {
             const startTime = startTimeEl.value;
@@ -110,6 +110,12 @@
                 averageTimeEl.textContent = '-';
                 minimumEventsEl.textContent = '-';
                 differenceTextEl.style.display = 'none';
+                return;
+            }
+
+            if (start && end && start >= end) {
+                alert('開始時間必須小於或等於結束時間。');
+                setCurrentTime(); // 設定當前時間
                 return;
             }
 
@@ -148,8 +154,8 @@
         startTimeEl.addEventListener('input', calculateTime);
         endTimeEl.addEventListener('input', calculateTime);
         eventCountEl.addEventListener('input', calculateTime);
-        startTimeEl.addEventListener('change', validateTimes);
-        endTimeEl.addEventListener('change', validateTimes);
+        // startTimeEl.addEventListener('change', validateTimes);
+        // endTimeEl.addEventListener('change', validateTimes);
 
         window.onload = function () {
             setCurrentTime(); // 設定當前時間
