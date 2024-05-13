@@ -113,7 +113,7 @@
                 return;
             }
 
-            if (start && end && start >= end) {
+            if (start > end) {
                 alert('開始時間必須小於或等於結束時間。');
                 setCurrentTime(); // 設定當前時間
                 return;
@@ -154,8 +154,8 @@
         startTimeEl.addEventListener('input', calculateTime);
         endTimeEl.addEventListener('input', calculateTime);
         eventCountEl.addEventListener('input', calculateTime);
-        // startTimeEl.addEventListener('change', validateTimes);
-        // endTimeEl.addEventListener('change', validateTimes);
+        startTimeEl.addEventListener('change', calculateTime);
+        endTimeEl.addEventListener('change', calculateTime);
 
         window.onload = function () {
             setCurrentTime(); // 設定當前時間
