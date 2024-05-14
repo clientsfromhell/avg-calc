@@ -48,7 +48,7 @@
 <body>
     <div class="container">
         <h1>上架包裹處理時間計算機</h1>
-        
+
         <label for="startTime">時間A:</label>
         <input type="time" id="startTime" placeholder="HH:MM:ss" step="1">
 
@@ -60,15 +60,15 @@
         <p id="differenceText" style="display: none;" class="highlight">還差 <span id="difference">-</span> 個包裹才達標</p>
 
         <p>
-            <span  style="white-space:nowrap">
-            <label for="eventCount">實際上架包裹數量:</label>
-            <input type="number" id="eventCount" inputmode="numeric" min="1" max="500" placeholder="輸入上架數量">
-        </span>
+            <span style="white-space:nowrap">
+                <label for="eventCount">實際上架包裹數量:</label>
+                <input type="number" id="eventCount" inputmode="numeric" min="1" max="500" placeholder="輸入上架數量">
+            </span>
         </p>
         <!-- <input class="slider-width" id="eventCount" type="range" value="170" min="1" max="350" oninput="this.nextElementSibling.value = this.value"> -->
         <!-- <output>170</output> -->
-        <p id="averageTimeText">單一包裹上架平均處理秒數: <span id="averageTime">-</span></p>
-
+        <p id="averageTimeText">單一包裹上架平均處理時間(秒): <span id="averageTime">-</span></p>
+        <!-- <a href="info.html">🦐智取流程</a> -->
     </div>
 
     <script>
@@ -80,7 +80,7 @@
         const averageTimeTextEl = document.getElementById('averageTimeText');
         const minimumEventsEl = document.getElementById('minimumEvents');
 
-        let setCurrentTime = function() {
+        let setCurrentTime = function () {
             const now = new Date();
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
@@ -92,14 +92,14 @@
         // let validateTimes = function() {
         //     const start = startTimeEl.value;
         //     const end = endTimeEl.value;
-            
+
         //     if (start && end && start >= end) {
         //         alert('開始時間必須小於或等於結束時間。');
         //         setCurrentTime(); // 設定當前時間
         //     }
         // }
-        
-        let calculateTime = function() {
+
+        let calculateTime = function () {
             const startTime = startTimeEl.value;
             const endTime = endTimeEl.value;
             const eventCountValue = eventCountEl.value;
@@ -163,6 +163,36 @@
             setCurrentTime();
             calculateTime();
         };
+
+
+        // 定义点击计数器
+        let clickCount = 0;
+        // 定义时间戳，用于重置计数
+        let lastTimeClicked = 0;
+
+        // 监听整个文档的点击事件
+        document.addEventListener('click', function (event) {
+            // 获取当前时间
+            const now = Date.now();
+
+            // 如果两次点击时间间隔超过2秒，重置计数器
+            if (now - lastTimeClicked > 2000) {
+                clickCount = 0;
+            }
+            lastTimeClicked = now;
+
+            // 检查点击位置是否在左上角区域（例如100x100像素内）
+            if (event.clientX < 100 && event.clientY < 100) {
+                clickCount++;
+                // 如果点击次数达到5次
+                if (clickCount === 5) {
+                    // 重置计数器
+                    clickCount = 0;
+                    // 跳转到指定的页面
+                    window.location.href = 'info.html';
+                }
+            }
+        });
     </script>
 </body>
 
