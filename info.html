@@ -5,10 +5,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>小抄</title>
+    <style>
+        img.highlightable,
+        svg.highlightable {
+            transition: filter 0.3s;
+            cursor: pointer;
+        }
+
+        .dim {
+            filter: brightness(0%);
+        }
+    </style>
 </head>
+
 <body>
     <!-- <div style="white-space: pre-wrap;"> -->
-    <img src="images/empty-box.jpg" width="500px" alt="裸件RFID">
+    <div>
+        <svg class="highlightable" xmlns:xlink="http://www.w3.org/1999/xlink" id="barcode-svg" width="252px" height="148px" x="0px" y="0px"
+            viewBox="0 0 252 148" xmlns="http://www.w3.org/2000/svg" version="1.1" style="transform: translate(0,0)">
+            <rect x="0" y="0" width="252" height="148" style="fill:#FFFFFF;" />
+            <g transform="translate(14, 14)" style="fill:#000000;">
+                <rect x="0" y="0" width="4" height="100" />
+                <rect x="6" y="0" width="2" height="100" />
+                <rect x="12" y="0" width="2" height="100" />
+                <rect x="22" y="0" width="4" height="100" />
+                <rect x="28" y="0" width="6" height="100" />
+                <rect x="36" y="0" width="2" height="100" />
+                <rect x="44" y="0" width="6" height="100" />
+                <rect x="52" y="0" width="6" height="100" />
+                <rect x="60" y="0" width="4" height="100" />
+                <rect x="66" y="0" width="6" height="100" />
+                <rect x="78" y="0" width="2" height="100" />
+                <rect x="82" y="0" width="4" height="100" />
+                <rect x="88" y="0" width="4" height="100" />
+                <rect x="96" y="0" width="6" height="100" />
+                <rect x="106" y="0" width="2" height="100" />
+                <rect x="110" y="0" width="2" height="100" />
+                <rect x="114" y="0" width="6" height="100" />
+                <rect x="122" y="0" width="8" height="100" />
+                <rect x="132" y="0" width="2" height="100" />
+                <rect x="138" y="0" width="4" height="100" />
+                <rect x="150" y="0" width="2" height="100" />
+                <rect x="154" y="0" width="4" height="100" />
+                <rect x="162" y="0" width="6" height="100" />
+                <rect x="170" y="0" width="2" height="100" />
+                <rect x="176" y="0" width="6" height="100" />
+                <rect x="184" y="0" width="4" height="100" />
+                <rect x="192" y="0" width="2" height="100" />
+                <rect x="198" y="0" width="4" height="100" />
+                <rect x="208" y="0" width="6" height="100" />
+                <rect x="216" y="0" width="2" height="100" />
+                <rect x="220" y="0" width="4" height="100" /><text style="font: 20px Arial" text-anchor="middle" x="112"
+                    y="120">SPX27222</text>
+            </g>
+        </svg>
+    </div>
+    <div>
+        <img class="highlightable" src="images/empty-box.jpg" width="500px" alt="裸件RFID">
+    </div>
+    <div>
+        <img class="highlightable" src="images/receipt.jpg" width="250px" alt="收據機">
+    </div>
     <!-- </div> -->
     <pre>
         🦐智取流程
@@ -261,9 +318,22 @@
         3. 破損包裹處理
         4. 顧客未取件，停用櫃位
     </pre>
-    
 
 
-    <img src="images/receipt.jpg" width="250px" alt="收據機">
+
+    <script>
+        document.querySelectorAll('.highlightable').forEach(elem => {
+            elem.onclick = () => {
+                document.querySelectorAll('.highlightable').forEach(e => {
+                    if (e !== elem) {
+                        e.classList.add('dim');
+                    } else {
+                        e.classList.remove('dim');
+                    }
+                });
+            };
+        });
+    </script>
 </body>
+
 </html>
