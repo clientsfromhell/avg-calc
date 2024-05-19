@@ -15,7 +15,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 150vh;
+            height: 175vh;
             margin: 2em;
             background-color: dimgray;
         }
@@ -73,14 +73,14 @@
     <div class="container">
         <h1>⏰上架秒數計算機⏰</h1>
         <div>
-            <!-- <div style="display: inline-flex;"> -->
+            <div style="display: inline-flex;">
                 <label for="startTime">時間A:</label>
                 <input type="time" id="startTime" placeholder="HH:MM:ss" step="1">
-            <!-- </div> -->
-            <!-- <div style="display: inline-flex;"> -->
+            </div>
+            <div style="display: inline-flex;">
                 <label for="endTime">時間B:</label>
                 <input type="time" id="endTime" placeholder="HH:MM:ss" step="1">
-            <!-- </div> -->
+            </div>
             <div>A與B間的總秒數: <span id="totalSeconds">-</span></div>
 
             <p id="minimumEventsText">達標至少需上架包裹數量: <span id="minimumEvents">-</span></p>
@@ -97,7 +97,7 @@
         <hr>
 
         <h1>工號條碼產生器</h1>
-        <p>輸入完畢請點任意處產生條碼</p>
+        <p>點擊 QR code 以利掃描</p>
         <div>
             <div>
                 <span>SPX </span><input type="number" inputmode="numeric" id="employeeid" value="0">
@@ -105,9 +105,10 @@
             <div id="employeeid_qrcode" class="qrcode highlightable"></div>
         </div>
 
-        <h1 style="display: none;">常用標籤</h1>
-        <p style="display: none;">點擊 QR code 以利掃描</p>
-        <div style="display: none;">
+        <hr>
+        <h1>常用標籤</h1>
+        <p>點擊 QR code 以利掃描</p>
+        <div style="display: inline-flex;">
             <div>
                 <span style="display: block;">裸件RFID</span>
                 <div id="emptybox_qrcode" class="qrcode highlightable"></div>
@@ -127,10 +128,10 @@
         <hr>
         <h1>重要公告</h1>
         <span>
-            [南北分檢]<br><br>
+            [南北分檢解答]
 
             南北分貨甚麼時候開始？
-            2024/05/21<br><br>
+            5/21<br><br>
 
             要運往南倉的正物流TO單名稱？
             (中部門市專用)正物流_南<br><br>
