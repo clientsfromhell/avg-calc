@@ -249,7 +249,7 @@
 
         function makeQRCode() {
             let employeeid = document.getElementById("employeeid");
-            if (!employeeid.value || isNaN(employeeid.value) || employeeid.value === '0') {
+            if (!employeeid.value || isNaN(employeeid.value) || employeeid.value === '0' || parseInt(employeeid.value) < 0) {
                 document.getElementById('employeeid_qrcode').style.display = 'none';
                 // alert("請輸入工號");
                 employeeid.focus();
