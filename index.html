@@ -67,6 +67,32 @@
         .dim {
             filter: brightness(0%);
         }
+
+        #copy-button {
+            position: relative;
+        }
+
+        #tooltip {
+            visibility: hidden;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+
+        #copy-button.show-tooltip #tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -97,7 +123,7 @@
         </div>
         <hr>
 
-        <h1>工號條碼產生器</h1>
+        <h1>工號條碼產生器(打卡用)</h1>
         <p>輸入完畢請點任意處產生條碼</p>
         <div>
             <div>
@@ -106,6 +132,31 @@
             <!-- <div id="employeeid_qrcode" class="qrcode highlightable"></div> -->
             <div id="employeeid_barcode" class="qrcode highlightable"></div>
         </div>
+
+        <h1>回報格式複製</h1>
+        <div>
+            <div>
+                <span style="display: block;">閉店回報格式</span>
+                <div id="close-report-text-container" style="text-align: left; background-color: rgb(228, 255, 24);">
+                    日期：<span id="date"></span><br>
+                    門市名稱：<br>
+                    上架秒數：<br>
+                    包裹進店驗收件數：<br>
+                    寄件數：<br>
+                    上下班時間：
+                </div>
+                <button id="copy-button">一鍵複製
+                    <div id="tooltip">已複製！</div>
+                </button>
+            </div>
+
+            <!-- <div>
+                <span style="display: block;">開班回報格式</span>
+                <div id="receipt_qrcode" class="qrcode highlightable"></div>
+            </div> -->
+
+        </div>
+
 
         <h1 style="display: none;">常用標籤</h1>
         <p style="display: none;">點擊 QR code 以利掃描</p>
@@ -128,10 +179,10 @@
 
         <hr>
         <h1>重要公告</h1>
-        <span>
+        <div style="text-align: left">
             [南北分檢]<br><br>
 
-            南北分貨甚麼時候開始？
+            南北分貨甚麼時候開始？<br>
             2024/05/21<br><br>
 
             要運往南倉的正物流TO單名稱？<br>
@@ -140,21 +191,21 @@
             要運往北倉的正物流TO單名稱？<br>
             (中部門市專用)正物流_北<br><br>
 
-            NDD離店南 選哪一個？
+            NDD離店南 選哪一個？<br>
             隔日到貨南<br><br>
 
-            NDD離店北 選哪一個？
+            NDD離店北 選哪一個？<br>
             隔日到貨北<br><br>
 
-            隔日到貨(NDD) 外箱是否要貼大張的南北貼紙？
+            隔日到貨(NDD) 外箱是否要貼大張的南北貼紙？<br>
             要<br><br>
 
-            正物流外箱是否要貼大張的南北貼紙？
+            正物流外箱是否要貼大張的南北貼紙？<br>
             不用<br><br>
 
             正物流離店區如何擺放？<br>
             南一路北一路分開放<br><br>
-        </span>
+        </div>
     </div>
 
     <script>
@@ -234,6 +285,8 @@
             document.getElementById("employeeid").value = localStorage.getItem('employeeid') || '0';
             makeQRCode();
             showCommonQRCode();
+            processDateString();
+            copyButton();
 
             document.querySelectorAll('.highlightable').forEach(elem => {
                 elem.onclick = () => {
@@ -247,6 +300,49 @@
                 };
             });
         });
+
+        function copyButton() {
+            // 一鍵複製功能
+            const copyButton = document.getElementById('copy-button');
+            copyButton.addEventListener('click', () => {
+                const textToCopy = document.getElementById('close-report-text-container').innerText;
+                copyToClipboard(textToCopy);
+                showTooltip();
+                // alert('文字已複製');
+            });
+        }
+
+        function processDateString() {
+            // 自動填入今天的日期
+            const dateElement = document.getElementById('date');
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // 月份從0開始，所以要加1
+            const day = String(today.getDate()).padStart(2, '0');
+            const weekdayNames = ['日', '一', '二', '三', '四', '五', '六'];
+            const weekday = weekdayNames[today.getDay()];
+            const formattedDate = `${year}/${month}/${day} (${weekday})`;
+            dateElement.textContent = formattedDate;
+        }
+
+        // 複製到剪貼板的函數
+        function copyToClipboard(text) {
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = text;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+        }
+
+        // 顯示tooltip的函數
+        function showTooltip() {
+            const copyButton = document.getElementById('copy-button');
+            copyButton.classList.add('show-tooltip');
+            setTimeout(() => {
+                copyButton.classList.remove('show-tooltip');
+            }, 500); // 2秒後隱藏
+        }
 
         function makeQRCode() {
             let employeeid = document.getElementById("employeeid");
@@ -282,7 +378,7 @@
                 moduleSize: 10,
                 posX: 10,
                 posY: 20,
-                addQuietZone:1
+                addQuietZone: 1
             };
 
             $("#employeeid_barcode").barcode(
