@@ -8,6 +8,7 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js"></script> -->
     <!-- <script src="js/jquery.qrcode.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
     <title>⏰上架秒數計算機⏰</title>
     <style>
         body {
@@ -74,12 +75,12 @@
         <h1>⏰上架秒數計算機⏰</h1>
         <div>
             <!-- <div style="display: inline-flex;"> -->
-                <label for="startTime">時間A:</label>
-                <input type="time" id="startTime" placeholder="HH:MM:ss" step="1">
+            <label for="startTime">時間A:</label>
+            <input type="time" id="startTime" placeholder="HH:MM:ss" step="1">
             <!-- </div> -->
             <!-- <div style="display: inline-flex;"> -->
-                <label for="endTime">時間B:</label>
-                <input type="time" id="endTime" placeholder="HH:MM:ss" step="1">
+            <label for="endTime">時間B:</label>
+            <input type="time" id="endTime" placeholder="HH:MM:ss" step="1">
             <!-- </div> -->
             <div>A與B間的總秒數: <span id="totalSeconds">-</span></div>
 
@@ -102,7 +103,8 @@
             <div>
                 <span>SPX </span><input type="number" inputmode="numeric" id="employeeid" value="0">
             </div>
-            <div id="employeeid_qrcode" class="qrcode highlightable"></div>
+            <!-- <div id="employeeid_qrcode" class="qrcode highlightable"></div> -->
+            <div id="employeeid_barcode" class="qrcode highlightable"></div>
         </div>
 
         <h1 style="display: none;">常用標籤</h1>
@@ -249,20 +251,46 @@
         function makeQRCode() {
             let employeeid = document.getElementById("employeeid");
             if (!employeeid.value || isNaN(employeeid.value) || employeeid.value === '0' || parseInt(employeeid.value) < 0) {
-                document.getElementById('employeeid_qrcode').style.display = 'none';
+                // document.getElementById('employeeid_qrcode').style.display = 'none';
+                document.getElementById('employeeid_barcode').style.display = 'none';
                 // alert("請輸入工號");
                 employeeid.focus();
                 return;
             } else {
-                document.getElementById('employeeid_qrcode').style.display = 'inline-block';
+                // document.getElementById('employeeid_qrcode').style.display = 'inline-block';
+                document.getElementById('employeeid_barcode').style.display = 'inline-block';
             }
-            $('#employeeid_qrcode').empty();
-            $('#employeeid_qrcode').qrcode({
-                render: 'table',
-                width: 120,
-                height: 120,
-                text: 'SPX' + employeeid.value
-            });
+            // $('#employeeid_qrcode').empty();
+            // $('#employeeid_qrcode').qrcode({
+            //     render: 'table',
+            //     width: 120,
+            //     height: 120,
+            //     text: 'SPX' + employeeid.value
+            // });
+
+            let value = {
+                code: 'SPX' + employeeid.value,
+                rect: true
+            };
+            let btype = 'code128';
+            let settings = {
+                output: 'svg',
+                bgColor: '#FFFFFF',
+                color: '#000000',
+                barWidth: 2,
+                barHeight: 100,
+                moduleSize: 10,
+                posX: 10,
+                posY: 20,
+                addQuietZone:1
+            };
+
+            $("#employeeid_barcode").barcode(
+                value,
+                btype,
+                settings
+            );
+
         }
 
         function showCommonQRCode() {
