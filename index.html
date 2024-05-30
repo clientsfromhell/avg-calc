@@ -93,6 +93,32 @@
             visibility: visible;
             opacity: 1;
         }
+
+        #copy-button2 {
+            position: relative;
+        }
+
+        #tooltip2 {
+            visibility: hidden;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+
+        #copy-button2.show-tooltip #tooltip2 {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -158,9 +184,9 @@
         </div>
 
         <hr>
-        <h1>閉店回報格式複製</h1>
+        <h1>回報文字格式複製</h1>
         <div>
-            <div>
+            <div style="display: inline-block;">
                 <span style="display: block;">閉店回報格式</span>
                 <div id="close-report-text-container" style="text-align: left; background-color: rgb(228, 255, 24);">
                     日期：<span id="date"></span><br>
@@ -174,43 +200,83 @@
                     <div id="tooltip">已複製！</div>
                 </button>
             </div>
-
-            <!-- <div>
+            <div style="display: inline-block;">
+                <span style="display: block;">回報照片附加文字</span>
+                <div id="pic-report-text-container" style="text-align: left; background-color: rgb(228, 255, 24);">
+                    <div style="display: flex; align-items: center;">
+                        <span id="pic-date"></span>
+                        <select id="pic-store" style="margin-left: 1ch;">
+                            <option value="員林莒光二">員林莒光二</option>
+                            <option value="員林惠來">員林惠來</option>
+                            <option value="員林建國">員林建國</option>
+                            <option value="大村茄苳">大村茄苳</option>
+                            <option value="埔心中正">埔心中正</option>
+                            <option value="永靖瑚璉">永靖瑚璉</option>
+                            <option value="永靖中山">永靖中山</option>
+                            <option value="北斗中山">北斗中山</option>
+                            <option value="北斗復興">北斗復興</option>
+                            <option value="北斗斗苑">北斗斗苑</option>
+                            <option value="花壇彰員">花壇彰員</option>
+                            <option value="花壇中正">花壇中正</option>
+                            <option value="溪州中山">溪州中山</option>
+                        </select>
+                        <select id="pic-schedule">
+                            <option value="早">早</option>
+                            <option value="晚">晚</option>
+                        </select>
+                        <input type="radio" style="margin-left: 1ch;" id="extra0" value="" name="extra" checked>
+                        <label for="extra0" style="white-space: nowrap;"> 無附加文字</label>
+                        <input type="radio" style="margin-left: 1ch;" id="extra1" value="垃圾帶走" name="extra">
+                        <label for="extra1" style="white-space: nowrap;"> 垃圾帶走</label>
+                        <input type="radio" style="margin-left: 1ch;" id="extra2" value="異常包裹" name="extra">
+                        <label for="extra2" style="white-space: nowrap;"> 異常包裹</label>
+                        <input type="radio" style="margin-left: 1ch;" id="extra3" value="買家取件成功" name="extra">
+                        <label for="extra3" style="white-space: nowrap;"> 買家取件成功</label>
+                        <input type="radio" style="margin-left: 1ch;" id="extra4" value="櫃位全開無遺留包裹" name="extra">
+                        <label for="extra4" style="white-space: nowrap;"> 櫃位全開無遺留包裹</label>
+                    </div>
+                </div>
+                <button id="copy-button2">一鍵複製
+                    <div id="tooltip2">已複製！</div>
+                </button>
+            </div>
+        </div>
+        <!-- <div>
                 <span style="display: block;">開班回報格式</span>
                 <div id="receipt_qrcode" class="qrcode highlightable"></div>
             </div> -->
 
-        </div>
+    </div>
 
-        <hr>
-        <h1>重要公告</h1>
-        <div style="text-align: left">
-            [南北分檢]<br><br>
+    <hr>
+    <h1>重要公告</h1>
+    <div style="text-align: left">
+        [南北分檢]<br><br>
 
-            南北分貨甚麼時候開始？<br>
-            2024/05/21<br><br>
+        南北分貨甚麼時候開始？<br>
+        2024/05/21<br><br>
 
-            要運往南倉的正物流TO單名稱？<br>
-            (中部門市專用)正物流_南<br><br>
+        要運往南倉的正物流TO單名稱？<br>
+        (中部門市專用)正物流_南<br><br>
 
-            要運往北倉的正物流TO單名稱？<br>
-            (中部門市專用)正物流_北<br><br>
+        要運往北倉的正物流TO單名稱？<br>
+        (中部門市專用)正物流_北<br><br>
 
-            NDD離店南 選哪一個？<br>
-            隔日到貨南<br><br>
+        NDD離店南 選哪一個？<br>
+        隔日到貨南<br><br>
 
-            NDD離店北 選哪一個？<br>
-            隔日到貨北<br><br>
+        NDD離店北 選哪一個？<br>
+        隔日到貨北<br><br>
 
-            隔日到貨(NDD) 外箱是否要貼大張的南北貼紙？<br>
-            要<br><br>
+        隔日到貨(NDD) 外箱是否要貼大張的南北貼紙？<br>
+        要<br><br>
 
-            正物流外箱是否要貼大張的南北貼紙？<br>
-            不用<br><br>
+        正物流外箱是否要貼大張的南北貼紙？<br>
+        不用<br><br>
 
-            正物流離店區如何擺放？<br>
-            南一路北一路分開放<br><br>
-        </div>
+        正物流離店區如何擺放？<br>
+        南一路北一路分開放<br><br>
+    </div>
     </div>
 
     <script>
@@ -291,7 +357,9 @@
             makeQRCode();
             showCommonQRCode();
             processDateString();
+            processPicDateString();
             copyButton();
+            copyButton2();
 
             document.querySelectorAll('.highlightable').forEach(elem => {
                 elem.onclick = () => {
@@ -312,7 +380,23 @@
             copyButton.addEventListener('click', () => {
                 const textToCopy = document.getElementById('close-report-text-container').innerText;
                 copyToClipboard(textToCopy);
-                showTooltip();
+                showTooltip('copy-button');
+                // alert('文字已複製');
+            });
+        }
+
+
+        function copyButton2() {
+            // 一鍵複製功能
+            const copyButton = document.getElementById('copy-button2');
+            copyButton.addEventListener('click', () => {
+                let textToCopy = $('#pic-date').text() + $('#pic-store').val() + $('#pic-schedule').val();
+                const extra = $('input[name="extra"]:checked').val();
+                if (extra !== '') {
+                    textToCopy += '\n' + extra;
+                }
+                copyToClipboard(textToCopy);
+                showTooltip('copy-button2');
                 // alert('文字已複製');
             });
         }
@@ -330,8 +414,19 @@
             dateElement.textContent = formattedDate;
         }
 
+        function processPicDateString() {
+            // 自動填入今天的日期
+            const dateElement = document.getElementById('pic-date');
+            const today = new Date();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // 月份從0開始，所以要加1
+            const day = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${month}/${day}`;
+            dateElement.textContent = formattedDate;
+        }
+
         // 複製到剪貼板的函數
-        function copyToClipboard(text) {
+        // document.execCommand 方法支持許多命令，但是由於該方法已被標記為過時，並可能在未來的瀏覽器版本中被移除，因此以下列出的命令可能在某些瀏覽器中不再支持
+        function copyToClipboard2(text) {
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = text;
             document.body.appendChild(tempTextArea);
@@ -340,13 +435,23 @@
             document.body.removeChild(tempTextArea);
         }
 
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    console.log('Text copied to clipboard');
+                })
+                .catch(err => {
+                    console.error('Error in copying text: ', err);
+                });
+        }
+
         // 顯示tooltip的函數
-        function showTooltip() {
-            const copyButton = document.getElementById('copy-button');
+        function showTooltip(buttonElementId) {
+            const copyButton = document.getElementById(buttonElementId);
             copyButton.classList.add('show-tooltip');
             setTimeout(() => {
                 copyButton.classList.remove('show-tooltip');
-            }, 500); // 2秒後隱藏
+            }, 750); // 0.75秒後隱藏
         }
 
         function makeQRCode() {
