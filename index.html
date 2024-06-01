@@ -119,6 +119,21 @@
             visibility: visible;
             opacity: 1;
         }
+
+        .pic-copy-radio {
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+            align-items: center;
+        }
+
+        input[type="radio"] {
+            margin-left: 1ch;
+        }
+
+        label {
+            margin-left: 1ch;
+        }
     </style>
 </head>
 
@@ -203,37 +218,55 @@
             <div style="display: inline-block;">
                 <span style="display: block;">回報照片附加文字</span>
                 <div id="pic-report-text-container" style="text-align: left; background-color: rgb(228, 255, 24);">
-                    <div style="display: flex; align-items: center;">
-                        <span id="pic-date"></span>
-                        <select id="pic-store" style="margin-left: 1ch;">
-                            <option value="員林莒光二">員林莒光二</option>
-                            <option value="員林惠來">員林惠來</option>
-                            <option value="員林建國">員林建國</option>
-                            <option value="大村茄苳">大村茄苳</option>
-                            <option value="埔心中正">埔心中正</option>
-                            <option value="永靖瑚璉">永靖瑚璉</option>
-                            <option value="永靖中山">永靖中山</option>
-                            <option value="北斗中山">北斗中山</option>
-                            <option value="北斗復興">北斗復興</option>
-                            <option value="北斗斗苑">北斗斗苑</option>
-                            <option value="花壇彰員">花壇彰員</option>
-                            <option value="花壇中正">花壇中正</option>
-                            <option value="溪州中山">溪州中山</option>
-                        </select>
-                        <select id="pic-schedule">
-                            <option value="早">早</option>
-                            <option value="晚">晚</option>
-                        </select>
-                        <input type="radio" style="margin-left: 1ch;" id="extra0" value="" name="extra" checked>
-                        <label for="extra0" style="white-space: nowrap;"> 無附加文字</label>
-                        <input type="radio" style="margin-left: 1ch;" id="extra1" value="垃圾帶走" name="extra">
-                        <label for="extra1" style="white-space: nowrap;"> 垃圾帶走</label>
-                        <input type="radio" style="margin-left: 1ch;" id="extra2" value="異常包裹" name="extra">
-                        <label for="extra2" style="white-space: nowrap;"> 異常包裹</label>
-                        <input type="radio" style="margin-left: 1ch;" id="extra3" value="買家取件成功" name="extra">
-                        <label for="extra3" style="white-space: nowrap;"> 買家取件成功</label>
-                        <input type="radio" style="margin-left: 1ch;" id="extra4" value="櫃位全開無遺留包裹" name="extra">
-                        <label for="extra4" style="white-space: nowrap;"> 櫃位全開無遺留包裹</label>
+                    <div style="display: block; align-items: center;">
+                        <div style="display: block;">
+                            <span id="pic-date"></span>
+                            <select id="pic-store" style="margin-left: 1ch;">
+                                <option value="員林莒光二">員林莒光二</option>
+                                <option value="員林惠來">員林惠來</option>
+                                <option value="員林建國">員林建國</option>
+                                <option value="大村茄苳">大村茄苳</option>
+                                <option value="埔心中正">埔心中正</option>
+                                <option value="永靖瑚璉">永靖瑚璉</option>
+                                <option value="永靖中山">永靖中山</option>
+                                <option value="北斗中山">北斗中山</option>
+                                <option value="北斗復興">北斗復興</option>
+                                <option value="北斗斗苑">北斗斗苑</option>
+                                <option value="花壇彰員">花壇彰員</option>
+                                <option value="花壇中正">花壇中正</option>
+                                <option value="溪州中山">溪州中山</option>
+                            </select>
+                            <select id="pic-schedule">
+                                <option value="早">早</option>
+                                <option value="晚">晚</option>
+                            </select>
+                        </div>
+                        <div style="display: inline-block;">
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra0" value="僅複製店名" name="extra">
+                                <label for="extra0"> 僅複製店名</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra1" value="" name="extra" checked>
+                                <label for="extra1"> 僅複製日期店名班別</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra2" value="垃圾帶走" name="extra">
+                                <label for="extra2"> 垃圾帶走</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra3" value="異常包裹" name="extra">
+                                <label for="extra3"> 異常包裹</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra4" value="買家取件成功" name="extra">
+                                <label for="extra4"> 買家取件成功</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra5" value="櫃位全開無遺留包裹" name="extra">
+                                <label for="extra5"> 櫃位全開無遺留包裹</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button id="copy-button2">一鍵複製
@@ -280,6 +313,15 @@
     </div>
 
     <script>
+        // rewrite in jquery syntax
+        // const startTimeEl = $('#startTime');
+        // const endTimeEl = $('#endTime');
+        // const eventCountEl = $('#eventCount');
+        // const totalSecondsEl = $('#totalSeconds');
+        // const averageTimeEl = $('#averageTime');
+        // const averageTimeTextEl = $('#averageTimeText');
+        // const minimumEventsEl = $('#minimumEvents');
+
         const startTimeEl = document.getElementById('startTime');
         const endTimeEl = document.getElementById('endTime');
         const eventCountEl = document.getElementById('eventCount');
@@ -288,11 +330,15 @@
         const averageTimeTextEl = document.getElementById('averageTimeText');
         const minimumEventsEl = document.getElementById('minimumEvents');
 
+
         let setCurrentTime = function () {
             const now = new Date();
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
             const seconds = now.getSeconds().toString().padStart(2, '0');
+            // rewrite in jquery syntax
+            // startTimeEl.val(`${hours}:${minutes}:${seconds}`);
+            // endTimeEl.val(`${hours}:${minutes}:${seconds}`);
             document.getElementById('startTime').value = hours + ':' + minutes + ':' + seconds;
             document.getElementById('endTime').value = hours + ':' + minutes + ':' + seconds;
         }
@@ -348,6 +394,13 @@
         document.addEventListener('DOMContentLoaded', function () {
             setCurrentTime();
             calculateTime();
+            // rewrite in jquery syntax
+            // startTimeEl.on('input', calculateTime);
+            // endTimeEl.on('input', calculateTime);
+            // eventCountEl.on('input', calculateTime);
+            // startTimeEl.on('change', calculateTime);
+            // endTimeEl.on('change', calculateTime);
+
             startTimeEl.addEventListener('input', calculateTime);
             endTimeEl.addEventListener('input', calculateTime);
             eventCountEl.addEventListener('input', calculateTime);
@@ -385,15 +438,18 @@
             });
         }
 
-
         function copyButton2() {
             // 一鍵複製功能
             const copyButton = document.getElementById('copy-button2');
             copyButton.addEventListener('click', () => {
                 let textToCopy = $('#pic-date').text() + $('#pic-store').val() + $('#pic-schedule').val();
                 const extra = $('input[name="extra"]:checked').val();
-                if (extra !== '') {
-                    textToCopy += '\n' + extra;
+                if (extra === '僅複製店名') {
+                    textToCopy = $('#pic-store').val();
+                } else {
+                    if (extra !== '') { // 不是"僅複製日期店名班別"，代表有附加後綴文字
+                        textToCopy += '\n' + extra;
+                    }
                 }
                 copyToClipboard(textToCopy);
                 showTooltip('copy-button2');
@@ -426,14 +482,14 @@
 
         // 複製到剪貼板的函數
         // document.execCommand 方法支持許多命令，但是由於該方法已被標記為過時，並可能在未來的瀏覽器版本中被移除，因此以下列出的命令可能在某些瀏覽器中不再支持
-        function copyToClipboard2(text) {
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = text;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempTextArea);
-        }
+        // function copyToClipboard2(text) {
+        //     const tempTextArea = document.createElement('textarea');
+        //     tempTextArea.value = text;
+        //     document.body.appendChild(tempTextArea);
+        //     tempTextArea.select();
+        //     document.execCommand('copy'); // this!!
+        //     document.body.removeChild(tempTextArea);
+        // }
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text)
@@ -460,7 +516,7 @@
                 // document.getElementById('employeeid_qrcode').style.display = 'none';
                 document.getElementById('employeeid_barcode').style.display = 'none';
                 // alert("請輸入工號");
-                employeeid.focus();
+                // employeeid.focus();
                 return;
             } else {
                 // document.getElementById('employeeid_qrcode').style.display = 'inline-block';
