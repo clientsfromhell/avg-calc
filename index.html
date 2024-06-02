@@ -178,7 +178,7 @@
         <hr>
         <h1>常用標籤</h1>
         <p>請點擊條碼以利掃描</p>
-        <div style="display: inline-flex;">
+        <div style="display: flex; flex-flow: column wrap; justify-content: center;">
             <div>
                 <span style="display: block;">裸件RFID</span>
                 <!-- <div id="emptybox_qrcode" class="qrcode highlightable"></div> -->
@@ -200,9 +200,9 @@
 
         <hr>
         <h1>回報文字格式複製</h1>
-        <div>
-            <div style="display: inline-block;">
-                <span style="display: block;">閉店回報格式</span>
+        <div style="display: flex; align-content: stretch; flex-flow: row wrap; justify-content: space-around;">
+            <div style="display: flex; flex-flow: column wrap; justify-content: flex-start; align-items: stretch;">
+                <span>閉店回報格式</span>
                 <div id="close-report-text-container" style="text-align: left; background-color: rgb(228, 255, 24);">
                     日期：<span id="date"></span><br>
                     門市名稱：<br>
@@ -215,8 +215,8 @@
                     <div id="tooltip">已複製！</div>
                 </button>
             </div>
-            <div style="display: inline-block;">
-                <span style="display: block;">回報照片附加文字</span>
+            <div style="display: inline-flexbox; flex-flow: column wrap; justify-content: flex-start; align-items: stretch;">
+                <span>回報照片附加文字</span>
                 <div id="pic-report-text-container" style="text-align: left; background-color: rgb(228, 255, 24);">
                     <div style="display: block; align-items: center;">
                         <div style="display: block;">
@@ -265,6 +265,38 @@
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra5" value="櫃位全開無遺留包裹" name="extra">
                                 <label for="extra5"> 櫃位全開無遺留包裹</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra6" value="銷毀" name="extra">
+                                <label for="extra6"> 銷毀</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra7" value="超材" name="extra">
+                                <label for="extra7"> 超材</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra8" value="買家申退退SOC" name="extra">
+                                <label for="extra8"> 買家申退退SOC</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra9" value="遺失件" name="extra">
+                                <label for="extra9"> 遺失件</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra10" value="重複件" name="extra">
+                                <label for="extra10"> 重複件</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra11" value="濕損" name="extra">
+                                <label for="extra11"> 濕損</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra12" value="破損" name="extra">
+                                <label for="extra12"> 破損</label>
+                            </div>
+                            <div class="pic-copy-radio">
+                                <input type="radio" id="extra13" value="訂單取消" name="extra">
+                                <label for="extra13"> 訂單取消</label>
                             </div>
                         </div>
                     </div>
