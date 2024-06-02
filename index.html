@@ -440,6 +440,7 @@
             endTimeEl.addEventListener('change', calculateTime);
             document.getElementById("employeeid").value = localStorage.getItem('employeeid') || '0';
             document.getElementById("pic-store").value = localStorage.getItem('pic-store') || '員林莒光二';
+            document.getElementById("pic-schedule").value = localStorage.getItem('pic-schedule') || '早';
             makeQRCode();
             showCommonQRCode();
             processDateString();
@@ -682,6 +683,11 @@
         $("#pic-store").on("change", function () {
             localStorage.setItem('pic-store', $("#pic-store").val());
         });
+
+        $("#pic-schedule").on("change", function () {
+            localStorage.setItem('pic-schedule', $("#pic-schedule").val());
+        });
+        
     </script>
 </body>
 
