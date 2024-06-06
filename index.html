@@ -205,17 +205,17 @@
                 <span>閉店回報格式</span>
                 <div id="close-report-text-container" style="text-align: left; background-color: rgb(228, 255, 24);">
                     日期：<span id="date"></span><br>
-                    門市名稱：<br>
+                    門市名稱：<span id="store"></span><span id="schedule"></span><br>
                     上架秒數：<br>
                     包裹進店驗收件數：<br>
                     寄件數：<br>
                     上下班時間：
                 </div>
-                <button id="copy-button">一鍵複製
+                <button id="copy-button">一鍵複製格式
                     <div id="tooltip">已複製！</div>
                 </button>
             </div>
-            <div style="display: inline-flexbox; flex-flow: column wrap; justify-content: flex-start; align-items: stretch;">
+            <div style="display: inline-flexbox; align-content: stretch; flex-flow: column wrap; justify-content: flex-start; align-items: stretch;">
                 <span>回報照片附加文字</span>
                 <div id="pic-report-text-container" style="text-align: left; background-color: rgb(228, 255, 24);">
                     <div style="display: block; align-items: center;">
@@ -301,7 +301,7 @@
                         </div>
                     </div>
                 </div>
-                <button id="copy-button2">一鍵複製
+                <button id="copy-button2">一鍵複製格式
                     <div id="tooltip2">已複製！</div>
                 </button>
             </div>
@@ -444,6 +444,8 @@
             makeQRCode();
             showCommonQRCode();
             processDateString();
+            processStoreString();
+            processScheduleString();
             processPicDateString();
             copyButton();
             copyButton2();
@@ -502,6 +504,16 @@
             const weekday = weekdayNames[today.getDay()];
             const formattedDate = `${year}/${month}/${day} (${weekday})`;
             dateElement.textContent = formattedDate;
+        }
+
+        function processStoreString() {
+            const storeElement = document.getElementById('store');
+            storeElement.textContent = document.getElementById("pic-store").value;
+        }
+
+        function processScheduleString() {
+            const scheduleElement = document.getElementById('schedule');
+            scheduleElement.textContent = document.getElementById("pic-schedule").value;
         }
 
         function processPicDateString() {
@@ -682,10 +694,12 @@
 
         $("#pic-store").on("change", function () {
             localStorage.setItem('pic-store', $("#pic-store").val());
+            processStoreString();
         });
 
         $("#pic-schedule").on("change", function () {
             localStorage.setItem('pic-schedule', $("#pic-schedule").val());
+            processScheduleString();
         });
         
     </script>
