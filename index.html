@@ -204,8 +204,8 @@
             <div style="display: flex; flex-flow: column wrap; justify-content: flex-start; align-items: stretch;">
                 <span>閉店回報格式</span>
                 <div id="close-report-text-container" style="text-align: left; background-color: rgb(228, 255, 24);">
-                    日期：<span id="date"></span><br>
-                    門市名稱：<span id="store"></span><span id="schedule"></span><br>
+                    日期：<span id="date"></span> <span id="schedule"></span><br>
+                    門市名稱：<span id="store"></span><br>
                     上架秒數：<br>
                     包裹進店驗收件數：<br>
                     寄件數：<br>
@@ -243,60 +243,60 @@
                         </div>
                         <div style="display: inline-block;">
                             <div class="pic-copy-radio">
-                                <input type="radio" id="extra0" value="僅複製店名" name="extra">
-                                <label for="extra0"> 僅複製店名</label>
+                                <input type="radio" id="extra0" value="" name="extra" checked>
+                                <label for="extra0"> 僅複製日期店名班別</label>
                             </div>
                             <div class="pic-copy-radio">
-                                <input type="radio" id="extra1" value="" name="extra" checked>
-                                <label for="extra1"> 僅複製日期店名班別</label>
+                                <input type="radio" id="extra1" value="僅複製店名" name="extra">
+                                <label for="extra1"> 僅複製店名</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra2" value="垃圾帶走" name="extra">
-                                <label for="extra2"> 垃圾帶走</label>
+                                <label for="extra2"> +垃圾帶走</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra3" value="異常包裹" name="extra">
-                                <label for="extra3"> 異常包裹</label>
+                                <label for="extra3"> +異常包裹</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra4" value="買家取件成功" name="extra">
-                                <label for="extra4"> 買家取件成功</label>
+                                <label for="extra4"> +買家取件成功</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra5" value="櫃位全開無遺留包裹" name="extra">
-                                <label for="extra5"> 櫃位全開無遺留包裹</label>
+                                <label for="extra5"> +櫃位全開無遺留包裹</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra6" value="銷毀" name="extra">
-                                <label for="extra6"> 銷毀</label>
+                                <label for="extra6"> +銷毀</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra7" value="超材" name="extra">
-                                <label for="extra7"> 超材</label>
+                                <label for="extra7"> +超材</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra8" value="買家申退退SOC" name="extra">
-                                <label for="extra8"> 買家申退退SOC</label>
+                                <label for="extra8"> +買家申退退SOC</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra9" value="遺失件" name="extra">
-                                <label for="extra9"> 遺失件</label>
+                                <label for="extra9"> +遺失件</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra10" value="重複件" name="extra">
-                                <label for="extra10"> 重複件</label>
+                                <label for="extra10"> +重複件</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra11" value="濕損" name="extra">
-                                <label for="extra11"> 濕損</label>
+                                <label for="extra11"> +濕損</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra12" value="破損" name="extra">
-                                <label for="extra12"> 破損</label>
+                                <label for="extra12"> +破損</label>
                             </div>
                             <div class="pic-copy-radio">
                                 <input type="radio" id="extra13" value="訂單取消" name="extra">
-                                <label for="extra13"> 訂單取消</label>
+                                <label for="extra13"> +訂單取消</label>
                             </div>
                         </div>
                     </div>
@@ -503,6 +503,7 @@
             const weekdayNames = ['日', '一', '二', '三', '四', '五', '六'];
             const weekday = weekdayNames[today.getDay()];
             const formattedDate = `${year}/${month}/${day} (${weekday})`;
+            // rewrite in jquery syntax
             dateElement.textContent = formattedDate;
         }
 
