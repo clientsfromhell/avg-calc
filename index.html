@@ -346,24 +346,41 @@
 
     <script>
         // rewrite in jquery syntax
-        // const startTimeEl = $('#startTime');
-        // const endTimeEl = $('#endTime');
-        // const eventCountEl = $('#eventCount');
+        const startTimeEl = $('#startTime');
+        const endTimeEl = $('#endTime');
+        const eventCountEl = $('#eventCount');
         // const totalSecondsEl = $('#totalSeconds');
         // const averageTimeEl = $('#averageTime');
         // const averageTimeTextEl = $('#averageTimeText');
         // const minimumEventsEl = $('#minimumEvents');
 
-        const startTimeEl = document.getElementById('startTime');
-        const endTimeEl = document.getElementById('endTime');
-        const eventCountEl = document.getElementById('eventCount');
+        // const startTimeEl = document.getElementById('startTime');
+        // const endTimeEl = document.getElementById('endTime');
+        // const eventCountEl = document.getElementById('eventCount');
         const totalSecondsEl = document.getElementById('totalSeconds');
         const averageTimeEl = document.getElementById('averageTime');
         const averageTimeTextEl = document.getElementById('averageTimeText');
         const minimumEventsEl = document.getElementById('minimumEvents');
 
+        $(document).ready(function () {
+            setCurrentTime();
+            calculateTime();
+            setTimeFieldsEventListeners();
+            setFieldDefaultValues();
+            makeQRCode();
+            showCommonQRCode();
+            processDateString();
+            processStoreString();
+            processScheduleString();
+            processPicDateString();
+            setListeners();
+            copyButton();
+            copyButton2();
+            setHighlightable();
+        });
 
-        let setCurrentTime = function () {
+
+        function setCurrentTime() {
             const now = new Date();
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
@@ -371,17 +388,26 @@
             // rewrite in jquery syntax
             // startTimeEl.val(`${hours}:${minutes}:${seconds}`);
             // endTimeEl.val(`${hours}:${minutes}:${seconds}`);
-            document.getElementById('startTime').value = hours + ':' + minutes + ':' + seconds;
-            document.getElementById('endTime').value = hours + ':' + minutes + ':' + seconds;
+            startTimeEl.val(hours + ':' + minutes + ':' + seconds);
+            endTimeEl.val(hours + ':' + minutes + ':' + seconds);
+            // document.getElementById('startTime').value = hours + ':' + minutes + ':' + seconds;
+            // document.getElementById('endTime').value = hours + ':' + minutes + ':' + seconds;
         }
 
-        let calculateTime = function () {
-            const startTime = startTimeEl.value;
-            const endTime = endTimeEl.value;
-            const eventCountValue = eventCountEl.value;
+        function calculateTime() {
+            const startTime = startTimeEl.val();
+            const endTime = endTimeEl.val();
+            const eventCountValue = eventCountEl.val();
             const eventCount = parseInt(eventCountValue, 10);
             const differenceTextEl = document.getElementById('differenceText');
             const differenceEl = document.getElementById('difference');
+
+            // const startTime = startTimeEl.value;
+            // const endTime = endTimeEl.value;
+            // const eventCountValue = eventCountEl.value;
+            // const eventCount = parseInt(eventCountValue, 10);
+            // const differenceTextEl = document.getElementById('differenceText');
+            // const differenceEl = document.getElementById('difference');
 
             if (!startTime || !endTime) {
                 totalSecondsEl.textContent = '-';
@@ -423,40 +449,52 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            setCurrentTime();
-            calculateTime();
-            
-            // startTimeEl.on('input', calculateTime);
-            // endTimeEl.on('input', calculateTime);
-            // eventCountEl.on('input', calculateTime);
-            // startTimeEl.on('change', calculateTime);
-            // endTimeEl.on('change', calculateTime);
+        function setTimeFieldsEventListeners() {
+            startTimeEl.on('input', calculateTime);
+            endTimeEl.on('input', calculateTime);
+            eventCountEl.on('input', calculateTime);
+            startTimeEl.on('change', calculateTime);
+            endTimeEl.on('change', calculateTime);
+            // startTimeEl.addEventListener('input', calculateTime);
+            // endTimeEl.addEventListener('input', calculateTime);
+            // eventCountEl.addEventListener('input', calculateTime);
+            // startTimeEl.addEventListener('change', calculateTime);
+            // endTimeEl.addEventListener('change', calculateTime);
+        }
 
-            startTimeEl.addEventListener('input', calculateTime);
-            endTimeEl.addEventListener('input', calculateTime);
-            eventCountEl.addEventListener('input', calculateTime);
-            startTimeEl.addEventListener('change', calculateTime);
-            endTimeEl.addEventListener('change', calculateTime);
-            
-            $('#employeeid').val(localStorage.getItem('employeeid') || '0');
-            $('#pic-store').val(localStorage.getItem('pic-store') || '員林莒光二');
-            $('#pic-schedule').val(localStorage.getItem('pic-schedule') || '早');
-
-
+        function setFieldDefaultValues() {
             // document.getElementById("employeeid").value = localStorage.getItem('employeeid') || '0';
             // document.getElementById("pic-store").value = localStorage.getItem('pic-store') || '員林莒光二';
             // document.getElementById("pic-schedule").value = localStorage.getItem('pic-schedule') || '早';
-            makeQRCode();
-            showCommonQRCode();
-            processDateString();
-            processStoreString();
-            processScheduleString();
-            processPicDateString();
-            copyButton();
-            copyButton2();
-            setHighlightable();
-        });
+            $('#employeeid').val(localStorage.getItem('employeeid') || '0');
+            $('#pic-store').val(localStorage.getItem('pic-store') || '員林莒光二');
+            $('#pic-schedule').val(localStorage.getItem('pic-schedule') || '早');
+        }
+
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     setCurrentTime();
+        //     calculateTime();
+
+        //     startTimeEl.addEventListener('input', calculateTime);
+        //     endTimeEl.addEventListener('input', calculateTime);
+        //     eventCountEl.addEventListener('input', calculateTime);
+        //     startTimeEl.addEventListener('change', calculateTime);
+        //     endTimeEl.addEventListener('change', calculateTime);
+            
+        //     $('#employeeid').val(localStorage.getItem('employeeid') || '0');
+        //     $('#pic-store').val(localStorage.getItem('pic-store') || '員林莒光二');
+        //     $('#pic-schedule').val(localStorage.getItem('pic-schedule') || '早');
+            
+        //     makeQRCode();
+        //     showCommonQRCode();
+        //     processDateString();
+        //     processStoreString();
+        //     processScheduleString();
+        //     processPicDateString();
+        //     copyButton();
+        //     copyButton2();
+        //     setHighlightable();
+        // });
 
 
         function setHighlightable() {
@@ -635,8 +673,6 @@
                 height: 120,
                 text: '8a71a6fee8e74f8a8a4f011882fcad8a-Printer'
             });
-
-
         }
 
         // window.onload = function () {
@@ -660,58 +696,72 @@
         //     qrcode.makeCode(employeeid);
         // }
 
+        function setListeners() {
+            setEmployeeIdListeners();
+            setStoreNameListeners();
+            setScheduleListeners();
+            setSecretAccessListeners();
+        }
 
-        // click counter
-        let clickCount = 0;
-        // timestamp to reset click counter
-        let lastTimeClicked = 0;
+        function setSecretAccessListeners() {
+            // click counter
+            let clickCount = 0;
+            // timestamp to reset click counter
+            let lastTimeClicked = 0;
 
-        // listen for document wide click events
-        document.addEventListener('click', function (event) {
-            // get current timestamp
-            const now = Date.now();
+            // listen for document wide click events
+            document.addEventListener('click', function (event) {
+                // get current timestamp
+                const now = Date.now();
 
-            // if the time between two clicks is over 2 secs, reset the counter
-            if (now - lastTimeClicked > 2000) {
-                clickCount = 0;
-            }
-            lastTimeClicked = now;
-
-            // check if the click is within the top left 100x100px area
-            if (event.clientX < 100 && event.clientY < 100) {
-                clickCount++;
-                // if clicked 5 times, redirect to info.html
-                if (clickCount === 5) {
-                    // reset counter
+                // if the time between two clicks is over 2 secs, reset the counter
+                if (now - lastTimeClicked > 2000) {
                     clickCount = 0;
-                    // just redirect to info.html
-                    window.location.href = 'info.html';
                 }
-            }
-        });
+                lastTimeClicked = now;
 
-        $("#employeeid").
-            on("blur", function () {
-                localStorage.setItem('employeeid', $("#employeeid").val());
-                makeQRCode();
-            }).
-            on("keydown", function (e) {
-                if (e.keyCode == 13) {
-                    localStorage.setItem('employeeid', $("#employeeid").val());
-                    makeQRCode();
+                // check if the click is within the top left 100x100px area
+                if (event.clientX < 100 && event.clientY < 100) {
+                    clickCount++;
+                    // if clicked 5 times, redirect to info.html
+                    if (clickCount === 5) {
+                        // reset counter
+                        clickCount = 0;
+                        // just redirect to info.html
+                        window.location.href = 'info.html';
+                    }
                 }
             });
+        }
 
-        $("#pic-store").on("change", function () {
-            localStorage.setItem('pic-store', $("#pic-store").val());
-            processStoreString();
-        });
+        function setEmployeeIdListeners() {
+            $("#employeeid").
+                on("blur", function () {
+                    localStorage.setItem('employeeid', $("#employeeid").val());
+                    makeQRCode();
+                }).
+                on("keydown", function (e) {
+                    if (e.keyCode == 13) {
+                        localStorage.setItem('employeeid', $("#employeeid").val());
+                        makeQRCode();
+                    }
+                });
+        }
 
-        $("#pic-schedule").on("change", function () {
-            localStorage.setItem('pic-schedule', $("#pic-schedule").val());
-            processScheduleString();
-        });
-        
+        function setStoreNameListeners() {
+            $("#pic-store").on("change", function () {
+                localStorage.setItem('pic-store', $("#pic-store").val());
+                processStoreString();
+            });
+        }
+
+        function setScheduleListeners() {
+            $("#pic-schedule").on("change", function () {
+                localStorage.setItem('pic-schedule', $("#pic-schedule").val());
+                processScheduleString();
+            });
+        }
+
     </script>
 </body>
 
