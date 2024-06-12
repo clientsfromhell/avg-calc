@@ -398,6 +398,7 @@
             const startTime = startTimeEl.val();
             const endTime = endTimeEl.val();
             const eventCountValue = eventCountEl.val();
+
             const eventCount = parseInt(eventCountValue, 10);
             const differenceTextEl = document.getElementById('differenceText');
             const differenceEl = document.getElementById('difference');
@@ -498,16 +499,20 @@
 
 
         function setHighlightable() {
-            document.querySelectorAll('.highlightable').forEach(elem => {
-                elem.onclick = () => {
-                    document.querySelectorAll('.highlightable').forEach(e => {
-                        if (e !== elem) {
-                            e.classList.add('dim');
+            $('.highlightable').each(function() {
+                $(this).on('click', function() {
+                    let clicked = $(this);
+                    $('.highlightable').each(function() {
+                        // $(this) returns a jQuery object that wraps the current DOM element, providing it with all the jQuery methods.
+                        // $(this)[0] or this returns the raw DOM element itself. It's the equivalent of getting the first element from the jQuery object, which is useful when you need to use DOM APIs that are not available in jQuery.
+                        // comparing the raw DOM elements, not the jQuery objects. This is necessary because jQuery objects are object wrappers around DOM elements, and comparing two jQuery objects with !== would compare the objects themselves, not the underlying DOM elements. By using [0], you're comparing the actual DOM elements, which is what you want in this case.
+                        if (clicked[0] !== $(this)[0]) {
+                            $(this).addClass('dim');
                         } else {
-                            e.classList.remove('dim');
+                            $(this).removeClass('dim');
                         }
                     });
-                };
+                });
             });
         }
 
