@@ -426,7 +426,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             setCurrentTime();
             calculateTime();
-            // rewrite in jquery syntax
+            
             // startTimeEl.on('input', calculateTime);
             // endTimeEl.on('input', calculateTime);
             // eventCountEl.on('input', calculateTime);
@@ -438,9 +438,15 @@
             eventCountEl.addEventListener('input', calculateTime);
             startTimeEl.addEventListener('change', calculateTime);
             endTimeEl.addEventListener('change', calculateTime);
-            document.getElementById("employeeid").value = localStorage.getItem('employeeid') || '0';
-            document.getElementById("pic-store").value = localStorage.getItem('pic-store') || '員林莒光二';
-            document.getElementById("pic-schedule").value = localStorage.getItem('pic-schedule') || '早';
+            
+            $('#employeeid').val(localStorage.getItem('employeeid') || '0');
+            $('#pic-store').val(localStorage.getItem('pic-store') || '員林莒光二');
+            $('#pic-schedule').val(localStorage.getItem('pic-schedule') || '早');
+
+
+            // document.getElementById("employeeid").value = localStorage.getItem('employeeid') || '0';
+            // document.getElementById("pic-store").value = localStorage.getItem('pic-store') || '員林莒光二';
+            // document.getElementById("pic-schedule").value = localStorage.getItem('pic-schedule') || '早';
             makeQRCode();
             showCommonQRCode();
             processDateString();
@@ -449,7 +455,11 @@
             processPicDateString();
             copyButton();
             copyButton2();
+            setHighlightable();
+        });
 
+
+        function setHighlightable() {
             document.querySelectorAll('.highlightable').forEach(elem => {
                 elem.onclick = () => {
                     document.querySelectorAll('.highlightable').forEach(e => {
@@ -461,7 +471,7 @@
                     });
                 };
             });
-        });
+        }
 
         function copyButton() {
             // 一鍵複製功能
@@ -503,7 +513,6 @@
             const weekdayNames = ['日', '一', '二', '三', '四', '五', '六'];
             const weekday = weekdayNames[today.getDay()];
             const formattedDate = `${year}/${month}/${day} (${weekday})`;
-            // rewrite in jquery syntax
             dateElement.textContent = formattedDate;
         }
 
